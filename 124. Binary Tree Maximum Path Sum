@@ -1,0 +1,17 @@
+class Solution:
+    # maximum = -9999999
+    def maxPathSum(self, root: TreeNode) -> int:
+        def recur(root):
+            nonlocal maximum
+            
+            if root == None:
+                return 0
+            leftmax = max(0,recur(root.left))
+            rightmax = max(0,recur(root.right))
+
+            maximum = max(root.val + leftmax + rightmax, maximum)
+
+            return max(leftmax+ root.val, rightmax+ root.val)
+        maximum = -9999
+        recur(root)
+        return maximum
